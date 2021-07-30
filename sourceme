@@ -1,0 +1,2 @@
+export PATH="$HOME/android_kernel/build-tools/linux-x86/bin:$PATH"
+

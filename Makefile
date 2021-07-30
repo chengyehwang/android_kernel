@@ -1,5 +1,5 @@
 # https://c55jeremy-tech.blogspot.com/2019/04/aospkernelaosp.html
-#
+# pixel 3
 tool:
 	curl https://storage.googleapis.com/git-repo-downloads/repo > repo
 	chmod 755 ./repo
@@ -11,4 +11,7 @@ env:
 	build/build.sh
 test:
 	fastboot boot Iimage.lz4-dtb
+
+build-tools:
+	git clone https://android.googlesource.com/kernel/prebuilts/build-tools
 
