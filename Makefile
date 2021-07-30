@@ -1,0 +1,14 @@
+# https://c55jeremy-tech.blogspot.com/2019/04/aospkernelaosp.html
+#
+tool:
+	curl https://storage.googleapis.com/git-repo-downloads/repo > repo
+	chmod 755 ./repo
+source:
+	./repo init -u https://android.googlesource.com/kernel/manifest -b android-msm-crosshatch-4.9-android11-qpr2
+	./repo sync
+env:
+	sh build/envsetup.sh
+	build/build.sh
+test:
+	fastboot boot Iimage.lz4-dtb
+
