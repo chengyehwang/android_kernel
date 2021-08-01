@@ -12,6 +12,7 @@ enable_coresight:
 	echo 1
 comp:
 	cp `realpath build.config` build.config_coresight
+	cp private/msm-google/drivers/hwtracing/coresight/coresight-etm4x.c coresight-etm4x.c
 	source ./sourceme ; build/build.sh
 
 test:
