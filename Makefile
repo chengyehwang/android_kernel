@@ -11,6 +11,7 @@ source:
 enable_coresight:
 	echo 1
 comp:
+	cp `realpath build.config` build.config_coresight
 	source ./sourceme ; build/build.sh
 
 test:

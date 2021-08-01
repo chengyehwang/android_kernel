@@ -1,0 +1,25 @@
+DEFCONFIG=b1c1_defconfig
+KERNEL_DIR=private/msm-google
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.common.clang
+POST_DEFCONFIG_CMDS="check_defconfig && update_nocfi_config"
+
+function update_nocfi_config() {
+  # Disable clang-specific options
+  ${KERNEL_DIR}/scripts/config --file ${OUT_DIR}/.config \
+    -d LTO \
+    -d LTO_CLANG \
+    -d CFI \
+    -d CFI_PERMISSIVE \
+    -d CFI_CLANG \
+    -e CORESIGHT \
+    -e CORESIGHT_LINK_AND_SINK_TMC \
+    -e CORESIGHT_SINK_TPIU \
+    -e CORESIGHT_SINK_ETBV10 \
+    -e CORESIGHT_SOURCE_ETM4X \
+    -e CORESIGHT_CTI \
+    -e CORESIGHT_HWEVENT \
+    -e CORESIGHT_REMOTE_ETM \
+    --set-val CONFIG_CORESIGHT_REMOTE_ETM_DEFAULT_ENABLE 1
+  (cd ${OUT_DIR} && \
+   make ${CC_LD_ARG} O=${OUT_DIR} olddefconfig)
+}
