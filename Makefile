@@ -14,7 +14,9 @@ env:
 	build/build.sh
 
 test:
-	fastboot boot Iimage.lz4-dtb
+	adb reboot bootloader
+	sleep 1
+	cd out/android-msm-pixel-4.9/private/msm-google/arch/arm64/boot ; fastboot boot Iimage.lz4-dtb
 
 build-tools:
 	git clone https://android.googlesource.com/kernel/prebuilts/build-tools
