@@ -1,5 +1,6 @@
 # https://c55jeremy-tech.blogspot.com/2019/04/aospkernelaosp.html
 # pixel 3
+SHELL := /bin/bash
 tool:
 	curl https://storage.googleapis.com/git-repo-downloads/repo > repo
 	chmod 755 ./repo
@@ -9,9 +10,8 @@ source:
 
 enable_coresight:
 	echo 1
-env:
-	sh build/envsetup.sh
-	build/build.sh
+comp:
+	source ./sourceme ; build/build.sh
 
 test:
 	adb reboot bootloader
