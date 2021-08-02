@@ -29,3 +29,13 @@ build-tools:
 
 se_policy:
 	adb shell getenforce
+ndk:
+	wget https://dl.google.com/android/repository/android-ndk-r21e-linux-x86_64.zip
+	unzip android-ndk-r21e-linux-x86_64.zip
+
+perf_clean:
+	cd private/msm-google/tools/perf ; make clean ARCH=aarch64 CROSS_COMPILE=${NDK_TOOLCHAIN} CFLAGS="--sysroot=${NDK_SYSROOT}"
+perf:
+	cd private/msm-google/tools/perf ; make ARCH=aarch64 CROSS_COMPILE=${NDK_TOOLCHAIN} CFLAGS="--sysroot=${NDK_SYSROOT}"
+
+
