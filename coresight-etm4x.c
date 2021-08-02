@@ -65,12 +65,6 @@ static void etm4_os_unlock(struct etmv4_drvdata *drvdata)
 static bool etm4_arch_supported(u8 arch)
 {
 	/* Mask out the minor version number */
-	switch (arch & 0xf0) {
-	case ETM_ARCH_MAJOR_V4:
-		break;
-	default:
-		return false;
-	}
 	return true;
 }
 
@@ -1101,9 +1095,14 @@ static struct amba_id etm4_ids[] = {
 		.data	= "Cortex-A73 ETM v4.0",
 	},
 	{
-		.id = 0x000bb95d,
+		.id = 0x000bb802,
 		.mask = 0x000fffff,
-		.data	= "845 ETM v4.0",
+		.data	= "845 Cortex-A55 ETM v4.0",
+	},
+	{
+		.id = 0x000bb803,
+		.mask = 0x000fffff,
+		.data	= "845 Cortex-A75 ETM v4.0",
 	},
 	{ 0, 0},
 };

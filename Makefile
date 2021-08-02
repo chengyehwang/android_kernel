@@ -20,6 +20,12 @@ test:
 	sleep 1
 	cd out/android-msm-pixel-4.9/private/msm-google/arch/arm64/boot ; fastboot boot Image.lz4-dtb
 
+debug:
+	fdtdump out/android-msm-pixel-4.9/private/msm-google/arch/arm64/boot/dts/qcom/sdm845-v2.dtb > dts-v2.log
+	fdtdump out/android-msm-pixel-4.9/private/msm-google/arch/arm64/boot/dts/qcom/sdm845-v2.1.dtb > dts-v2.1.log
+
 build-tools:
 	git clone https://android.googlesource.com/kernel/prebuilts/build-tools
 
+se_policy:
+	adb shell getenforce
