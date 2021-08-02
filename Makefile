@@ -36,6 +36,13 @@ ndk:
 perf_clean:
 	cd private/msm-google/tools/perf ; make clean ARCH=aarch64 CROSS_COMPILE=${NDK_TOOLCHAIN} CFLAGS="--sysroot=${NDK_SYSROOT}"
 perf:
-	cd private/msm-google/tools/perf ; make ARCH=aarch64 CROSS_COMPILE=${NDK_TOOLCHAIN} CFLAGS="--sysroot=${NDK_SYSROOT}"
+	cd private/msm-google/tools/perf ; make ARCH=aarch64 CROSS_COMPILE=${NDK_TOOLCHAIN} CFLAGS="--sysroot=${NDK_SYSROOT}" LIBCLANGLLVM=1
 
+perf_source:
+	cd perf;git init
+	cd perf;git remote add origin https://github.com/torvalds/linux.git
+	cd perf;git config core.sparsecheckout true
+	cd perf;echo "tools/perf" >> .git/info/sparse-checkout
+	cd perf;git fetch --depth=1 origin v5.10
+	cd perf;git checkout FETCH_HEAD
 
