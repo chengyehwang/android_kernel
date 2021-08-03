@@ -34,21 +34,11 @@ ndk:
 	unzip android-ndk-r21e-linux-x86_64.zip
 
 perf_clean:
-	cd perf/tools/perf ; make clean ARCH=arm64 CROSS_COMPILE=${NDK_TOOLCHAIN} CC=clang CFLAGS="--sysroot=${NDK_SYSROOT}" LLVM=1
+	cd perf/tools/perf ; export ARCH=arm64 ; make clean ARCH=arm64 CROSS_COMPILE=${NDK_TOOLCHAIN} CC=clang CFLAGS="--sysroot=${NDK_SYSROOT}" LLVM=1
 perf_comp:
-	cd perf/tools/perf ; make ARCH=arm64 CROSS_COMPILE=${NDK_TOOLCHAIN} CC=clang CFLAGS="--sysroot=${NDK_SYSROOT}" LLVM=1
+	cd perf/tools/perf ; export ARCH=arm64 ; export CROSS_COMPILE=${NDK_TOOLCHAIN}; make CC=clang CFLAGS="--sysroot=${NDK_SYSROOT}"
 
 perf_source:
-	-mkdir perf
-	cd perf;git init
-	cd perf;git remote add origin https://github.com/torvalds/linux.git
-	cd perf;git config core.sparsecheckout true
-	cd perf;echo "tools/perf" >> .git/info/sparse-checkout
-	cd perf;echo "tools/scripts" >> .git/info/sparse-checkout
-	cd perf;echo "tools/build" >> .git/info/sparse-checkout
-	cd perf;echo "tools/include" >> .git/info/sparse-checkout
-	cd perf;echo "tools/arch" >> .git/info/sparse-checkout
-	cd perf;echo "tools/lib" >> .git/info/sparse-checkout
-	cd perf;git fetch --depth=1 origin v5.10.55
-	cd perf;git checkout FETCH_HEAD
-
+	wget https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/snapshot/linux-5.10.55.tar.gz
+	tar zxvf linux-5.10.55.tar.gz
+	ln -s linux-5.10.55 perf
